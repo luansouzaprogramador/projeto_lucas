@@ -5,9 +5,9 @@ import os
 
 app = Flask(__name__)
 chamados = []
-TOKEN = os.getenv('WHATSAPP_TOKEN', 'seu_token_padrao')
-TELEFONE_ID = os.getenv('TELEFONE_ID', 'seu_telefone_id_padrao')
-VERIFY_TOKEN = os.getenv('VERIFY_TOKEN', 'provac@2025')
+TOKEN = os.getenv('WHATSAPP_TOKEN')
+TELEFONE_ID = os.getenv('TELEFONE_ID')
+VERIFY_TOKEN = os.getenv('VERIFY_TOKEN')
 
 
 def extrair_mensagem(data):

@@ -1,77 +1,205 @@
+/* index.css atualizado */
+:root {
+    --primary: #4361ee;
+    --primary-dark: #3a56d4;
+    --secondary: #7209b7;
+    --success: #06d6a0;
+    --danger: #ef476f;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --gray: #6c757d;
+    --light-gray: #e9ecef;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f7fa;
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #f5f7ff 0%, #f0f2fa 100%);
     margin: 0;
     padding: 20px;
-    color: #333;
+    color: var(--dark);
+    line-height: 1.6;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 2rem auto;
     background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
 }
 
 h1 {
-    color: #2c3e50;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 10px;
-    margin-bottom: 25px;
+    color: var(--primary-dark);
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 1.8rem;
+    position: relative;
+    padding-bottom: 0.8rem;
 }
 
+h1:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 70px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 2px;
+}
+
+/* Tabela - Desktop */
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-}
-
-th, td {
-    padding: 12px 15px;
-    text-align: left;
-    border-bottom: 1px solid #e0e0e0;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 th {
-    background-color: #3498db;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
     font-weight: 600;
+    text-align: left;
+    padding: 1.2rem 1.5rem;
+    position: sticky;
+    top: 0;
+}
+
+td {
+    padding: 1.1rem 1.5rem;
+    border-bottom: 1px solid var(--light-gray);
+    transition: var(--transition);
+}
+
+tr {
+    transition: var(--transition);
+}
+
+tr:last-child td {
+    border-bottom: none;
 }
 
 tr:nth-child(even) {
-    background-color: #f8f9fa;
+    background-color: #fafbff;
 }
 
 tr:hover {
-    background-color: #f1f8ff;
+    background-color: #f0f4ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.1);
 }
 
+/* Cards - Mobile */
+@media (max-width: 768px) {
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+    
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    
+    tr {
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--card-shadow);
+        padding: 0;
+    }
+    
+    td {
+        border: none;
+        border-bottom: 1px solid var(--light-gray);
+        position: relative;
+        padding-left: 45%;
+    }
+    
+    td:last-child {
+        border-bottom: none;
+    }
+    
+    td:before {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-weight: 600;
+        color: var(--primary-dark);
+    }
+    
+    td:nth-of-type(1):before { content: "ID:"; }
+    td:nth-of-type(2):before { content: "Número:"; }
+    td:nth-of-type(3):before { content: "Status:"; }
+    td:nth-of-type(4):before { content: "Abertura:"; }
+    td:nth-of-type(5):before { content: "Última Msg:"; }
+    td:nth-of-type(6):before { content: "Ações:"; }
+}
+
+/* Status */
 .status-aberto {
-    color: #27ae60;
-    font-weight: bold;
+    color: var(--success);
+    font-weight: 600;
+    background: rgba(6, 214, 160, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
 }
 
 .status-fechado {
-    color: #e74c3c;
-    font-weight: bold;
+    color: var(--danger);
+    font-weight: 600;
+    background: rgba(239, 71, 111, 0.1);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    display: inline-block;
 }
 
+/* Histórico */
 .historico {
-    background-color: #f8f9fa;
+    background-color: #f9fbff;
 }
 
 .historico-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 1rem 1.5rem;
     cursor: pointer;
+    background: rgba(114, 9, 183, 0.03);
+    border-radius: 8px;
 }
 
 .historico-content {
-    padding: 10px 0;
+    padding: 1rem 1.5rem 1.5rem;
+    display: none;
+}
+
+.historico-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .historico-content ul {
@@ -81,49 +209,108 @@ tr:hover {
 }
 
 .historico-content li {
-    padding: 8px 0;
-    border-bottom: 1px dashed #ddd;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .msg-data {
-    display: inline-block;
-    width: 160px;
-    color: #7f8c8d;
-    font-size: 0.9em;
+    color: var(--gray);
+    font-size: 0.85rem;
+    min-width: 140px;
+    font-weight: 500;
 }
 
 .msg-texto {
-    display: inline-block;
+    background: white;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
+    flex: 1;
+    border-left: 3px solid var(--primary);
 }
 
+/* Botões */
 .btn-fechar {
-    background-color: #e74c3c;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     color: white;
     border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    font-weight: 600;
+    transition: var(--transition);
+    min-width: 100px;
+    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
 }
 
 .btn-fechar:hover {
-    background-color: #c0392b;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
 }
 
 .btn-fechado {
-    background-color: #95a5a6;
-    color: white;
+    background: var(--light-gray);
+    color: var(--gray);
     border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
-    font-weight: bold;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    min-width: 100px;
 }
 
 .toggle-historico {
-    background: none;
+    background: rgba(255, 255, 255, 0.2);
     border: none;
-    font-size: 1.2em;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    color: #3498db;
+    color: white;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.toggle-historico:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(90deg);
+}
+
+/* Ajustes de responsividade */
+@media (max-width: 576px) {
+    .container {
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+    
+    td {
+        padding-left: 40%;
+    }
+    
+    .btn-fechar, .btn-fechado {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    
+    .msg-data, .msg-texto {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    td {
+        padding-left: 1rem;
+        padding-top: 2.5rem;
+        padding-bottom: 0.8rem;
+    }
+    
+    td:before {
+        top: 1rem;
+        transform: none;
+    }
 }
