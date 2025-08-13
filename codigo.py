@@ -1,12 +1,13 @@
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 import requests
 from datetime import datetime
+import os
 
 app = Flask(__name__)
 chamados = []
-TOKEN = "EAAUeTzj1A5oBPN95mguDWTHOnzEf7x7BRvERvbNu9rJeG0zhQRuafb8ek7vVPp01WiiZC8ZBkgT9v2Sia2ZADfRZCqU1YaQfoGyUYurg1wcvR14abNTtzNyZB9ofK6tZCXueUZA4y9s28Rp2iV8iWqzvcPhMLZCD93jRQdmX1sMBj88tkP4LheoMg2cZCzsSiqO3pbDM4qXZBqGv85qkHcwhManuTSxrOZAwV5Ogbjkz13RaWsH8AZDZD"
-TELEFONE_ID = "697548160116643"
-VERIFY_TOKEN = "provac@2025"
+TOKEN = os.getenv('WHATSAPP_TOKEN', 'seu_token_padrao')
+TELEFONE_ID = os.getenv('TELEFONE_ID', 'seu_telefone_id_padrao')
+VERIFY_TOKEN = os.getenv('VERIFY_TOKEN', 'provac@2025')
 
 
 def extrair_mensagem(data):
@@ -42,17 +43,14 @@ def receive_message():
     texto = mensagem.get("text", {}).get("body", "")
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-    # Buscar chamado aberto existente
     chamado = encontrar_chamado_aberto(numero)
 
     if chamado:
-        # Adiciona nova mensagem ao histórico existente
         nova_msg = {"texto": texto, "data": timestamp}
         chamado["historico"].append(nova_msg)
         chamado["data_ultima"] = timestamp
         print(f"Mensagem adicionada ao chamado #{chamado['id']}")
     else:
-        # Cria novo chamado
         novo_chamado = {
             "id": len(chamados) + 1,
             "numero": numero,
@@ -109,4 +107,4 @@ def fechar_chamado(id):
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))
