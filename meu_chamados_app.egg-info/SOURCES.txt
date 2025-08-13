@@ -1,0 +1,5 @@
+setup.py
+meu_chamados_app.egg-info/PKG-INFO
+meu_chamados_app.egg-info/SOURCES.txt
+meu_chamados_app.egg-info/dependency_links.txt
+meu_chamados_app.egg-info/top_level.txt
