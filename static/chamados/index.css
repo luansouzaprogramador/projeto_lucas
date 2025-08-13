@@ -1,4 +1,6 @@
-/* index.css atualizado */
+/* index.css atualizado - Design Premium & Responsivo */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 :root {
     --primary: #4361ee;
     --primary-dark: #3a56d4;
@@ -101,8 +103,6 @@ tr:nth-child(even) {
 
 tr:hover {
     background-color: #f0f4ff;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(67, 97, 238, 0.1);
 }
 
 /* Cards - Mobile */
@@ -130,6 +130,8 @@ tr:hover {
         border-bottom: 1px solid var(--light-gray);
         position: relative;
         padding-left: 45%;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
     }
     
     td:last-child {
@@ -139,8 +141,7 @@ tr:hover {
     td:before {
         position: absolute;
         left: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 1rem;
         font-weight: 600;
         color: var(--primary-dark);
     }
@@ -189,17 +190,6 @@ tr:hover {
 
 .historico-content {
     padding: 1rem 1.5rem 1.5rem;
-    display: none;
-}
-
-.historico-content.active {
-    display: block;
-    animation: fadeIn 0.3s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 .historico-content ul {
@@ -278,7 +268,6 @@ tr:hover {
 
 .toggle-historico:hover {
     background: rgba(255, 255, 255, 0.3);
-    transform: rotate(90deg);
 }
 
 /* Ajustes de responsividade */
@@ -311,6 +300,30 @@ tr:hover {
     
     td:before {
         top: 1rem;
-        transform: none;
+    }
+}
+
+/* Melhorias para telas muito pequenas */
+@media (max-width: 360px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    td {
+        padding-left: 1rem;
+        padding-top: 2.8rem;
+    }
+    
+    td:before {
+        font-size: 0.9rem;
+    }
+    
+    .btn-fechar, .btn-fechado {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
     }
 }
