@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Chamados</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chamados/index.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Chamados</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número</th>
+                    <th>Status</th>
+                    <th>Abertura</th>
+                    <th>Última Mensagem</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for chamado in chamados %}
+                <tr>
+                    <td>{{ chamado.id }}</td>
+                    <td>{{ chamado.numero }}</td>
+                    <td class="status-{{ chamado.status | lower }}">{{ chamado.status }}</td>
+                    <td>{{ chamado.data_abertura }}</td>
+                    <td>{{ chamado.data_ultima }}</td>
+                    <td>
+                        {% if chamado.status == 'Aberto' %}
+                        <form action="/chamados/{{ chamado.id }}/fechar" method="post">
+                            <button type="submit" class="btn-fechar">Fechar</button>
+                        </form>
+                        {% else %}
+                        <button class="btn-fechado" disabled>Fechado</button>
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr class="historico">
+                    <td colspan="6">
+                        <div class="historico-header">
+                            <strong>Histórico de Mensagens:</strong>
+                            <button class="toggle-historico">▼</button>
+                        </div>
+                        <div class="historico-content">
+                            <ul>
+                                {% for msg in chamado.historico %}
+                                <li>
+                                    <span class="msg-data">{{ msg.data }}</span>
+                                    <span class="msg-texto">{{ msg.texto }}</span>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        document.querySelectorAll('.toggle-historico').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.closest('.historico-header').nextElementSibling;
+                content.style.display = content.style.display === 'none' ? 'block' : 'none';
+                button.textContent = content.style.display === 'none' ? '►' : '▼';
+            });
+        });
+    </script>
+</body>
+
+</html>
